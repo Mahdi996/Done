@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Done</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_calenders">TestCalendersActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">بعدی</string>
+    <string name="save">ذخیره</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string name="weekday_1">ش</string>
+    <string name="weekday_2">ی</string>
+    <string name="weekday_3">د</string>
+    <string name="weekday_4">س</string>
+    <string name="weekday_5">چ</string>
+    <string name="weekday_6">پ</string>
+    <string name="weekday_7">ج</string>
+    <string name="home">تسک</string>
+    <string name="calendar">تقویم</string>
+    <string name="profile">پروفایل</string>
+    <string name="addTask">من میخوام …</string>
+    <string name="today">امروز</string>
+    <string name="dateSelected">تاریخ انتخاب شده:</string>
+    <string name="set_date">انتخاب تاریخ</string>
+    <string name="hide_completed">تسک های انجام شده نشون نده</string>
+    <string name="name">نام</string>
+    <string name="date_asc">تاریخ صعودی</string>
+    <string name="date_desc">تاریخ نزولی</string>
+    <string name="reminder_for">تنظیم یادآوری برای:</string>
+    <string name="set_date_time">انتخاب روز و ساعت</string>
+    <string name="add_sub_task">ریز تسک اضاقه کن</string>
+    <string name="description">توضیحات</string>
+    <string name="add_description">توضیحات اضافه کن</string>
+    <string name="created_at">ساخته شده در:</string>
+    <string name="delete_task">حذف تسک</string>
+    <string name="detail">جزئیات</string>
+    <string name="delete_completed">تسک های انجام شده حذف کن</string>
+
+</resources>

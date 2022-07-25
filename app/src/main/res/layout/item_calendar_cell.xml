@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.done.view.SquareContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:foreground="@drawable/day_ripple">
+
+    <TextView
+        android:id="@+id/calendar_day_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="4dp" />
+
+    <View
+        android:id="@+id/calendar_events"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_gravity="top|right"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/bg_shape_red"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/calendar_remarks"
+        android:layout_width="16dp"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="4dp"
+        android:background="@color/gray" />
+</com.example.done.view.SquareContainer>

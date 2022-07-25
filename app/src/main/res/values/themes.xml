@@ -1,0 +1,62 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Done" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/whiteP</item>
+        <item name="colorPrimaryVariant">@color/whiteD</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/bottomNavigationLight</item>
+        <item name="colorSecondaryVariant">@color/whiteD</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonTint">@color/blue</item>
+
+        <item name="rv_background">@color/light_background</item>
+        <item name="item_background">@color/item_light_background</item>
+        <item name="bottom_navigation_color">@color/bottomNavigationLight</item>
+        <item name="dividerColorDone">@color/dividerLight</item>
+
+    </style>
+
+    <declare-styleable name="item">
+        <attr name="item_background" format="color" />
+        <attr name="rv_background" format="color" />
+        <attr name="bottom_navigation_color" format="color" />
+        <attr name="dividerColorDone" format="color" />
+    </declare-styleable>
+
+    <style name="AddTaskAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="Theme.Done.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Done.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Done.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RightJustifyTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="itemStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:checkable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="cardBackgroundColor">?item_background</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="contentPaddingLeft">4dp</item>
+
+</style>
+
+    </resources>

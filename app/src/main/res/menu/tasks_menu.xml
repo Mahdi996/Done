@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/hideCompleted"
+        android:checkable="true"
+        android:title="@string/hide_completed" />
+
+    <item
+        android:id="@+id/deleteCompleted"
+        android:title="@string/delete_completed" />
+
+    <item
+        android:id="@+id/sortBy"
+        android:title="مرتب سازی براساس"
+        app:showAsAction="never">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/showByName"
+                    android:title="@string/name" />
+
+                <item
+                    android:id="@+id/showByDateAsc"
+                    android:title="@string/date_asc" />
+            </group>
+        </menu>
+    </item>
+</menu>

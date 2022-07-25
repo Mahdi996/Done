@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="light_background">#FFF5F9FF</color>
+    <color name="item_light_background">#FFFFFF</color>
+    <color name="dark_background">#FF27272F</color>
+    <color name="item_dark_background">#FF171D2E</color>
+
+    <color name="bottomNavigationDark">#FF32323A</color>
+    <color name="bottomNavigationLight">#F1F4FA</color>
+    <color name="bottomNavigationLightTest">#FFFBFBFB</color>
+
+    <color name="pink">#ffff1494</color>
+    <color name="purple">#FF7E57C2</color>
+    <color name="yellow">#FFFFBD21</color>
+    <color name="orange">#FFFF6614</color>
+    <color name="red">#FFEE534F</color>
+    <color name="green">#388E3C</color>
+    <color name="blue">#5C6BC0</color>
+
+
+    <color name="gray">#1FFFFFFF</color>
+
+    <color name="searchGray">#1FFFFFFF</color>
+
+    <color name="dividerNight">#FF414148</color>
+    <color name="dividerLight">#FFD7DBE0</color>
+
+
+    <color name="blackP">#FFFBFBFB</color>
+    <color name="blackL">#FFFBFBFB</color>
+    <color name="blackD">#02020c</color>
+
+
+    <color name="whiteP">#2D2D33</color>
+    <color name="whiteL">#56565c</color>
+    <color name="whiteD">#ffffff</color>
+</resources>
