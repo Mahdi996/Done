@@ -25,10 +25,11 @@ class TaskDetailViewModel(
 
     val id = bundle!!.getParcelable<Task>(EXTRA_KEY_DATA)!!.id
     val subs = subTaskRepository.get(id).asLiveData()
+    val task = bundle!!.getParcelable<Task>(EXTRA_KEY_DATA)
 
 
-    suspend fun getDates(): List<DoneDate> =
-        dateRepository.get(id)
+    fun getDates() =
+        dateRepository.get(id).asLiveData()
 
 
     suspend fun editTask(task: Task, dateId: Int) {
@@ -37,6 +38,12 @@ class TaskDetailViewModel(
             val date = addZero(jalali)
             taskRepository.edit(task.copy(updatedUtc = utc, date = date))
             updateDate(dateId, task.id, jalali)
+        }
+    }
+
+    suspend fun deleteReminder(doneDate: DoneDate) {
+        viewModelScope.launch {
+            dateRepository.delete(doneDate)
         }
     }
 
@@ -103,4 +110,11 @@ class TaskDetailViewModel(
     suspend fun addDeadline(doneDate: DoneDate) {
         dateRepository.add(doneDate.copy(taskId = id))
     }
+
+    suspend fun editDeadline(doneDate: DoneDate) {
+        dateRepository.edit(doneDate)
+    }
+
+    fun getDeadline(taskId: Int): DoneDate = dateRepository.getDeadline(taskId)
+
 }

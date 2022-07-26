@@ -1,6 +1,11 @@
 package com.example.done.feature.task.detail.deadline
 
+import android.app.AlarmManager
 import android.app.Dialog
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +22,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.lifecycleScope
 import com.example.done.R
-import com.example.done.common.CalendarConstants
-import com.example.done.common.formatDate
+import com.example.done.common.*
 import com.example.done.data.calendar.CalendarDay
 import com.example.done.data.date.DoneDate
 import com.example.done.data.date.TYPE_DEADLINE
+import com.example.done.data.task.Task
 import com.example.done.databinding.DialogDeadlineBinding
 import com.example.done.feature.calendar.CalendarItem
 import com.example.done.feature.calendar.CalendarViewModel
@@ -37,6 +42,8 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.random.Random
 
 class DeadlineFragment : BottomSheetDialogFragment() {
 
@@ -52,6 +59,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
     private lateinit var dialog: BottomSheetDialog
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var title: TextView
+    private lateinit var task: Task
     private var year = 0
     private var month = 0
     private var day = 0
@@ -79,6 +87,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
         bottomSheetBehavior = BottomSheetBehavior.from(view.parent as View)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
+        task = sharedViewModel.task!!
 
         val translateToRight = TranslateAnimation(
             Animation.RELATIVE_TO_PARENT,
@@ -117,6 +126,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
 
         time.hour = 9
         time.minute = 0
+        time.setIs24HourView(true)
 
         time.setOnTimeChangedListener { _, hourOfDay, minute ->
             hour = hourOfDay
@@ -191,22 +201,75 @@ class DeadlineFragment : BottomSheetDialogFragment() {
                 date.startAnimation(translateToRight)
                 next.text = resources.getString(R.string.save)
             } else {
+                var code = 0
                 lifecycleScope.launch(Dispatchers.IO) {
-                    sharedViewModel.addDeadline(
-                        DoneDate(
-                            0,
-                            0,
-                            TYPE_DEADLINE,
-                            year,
-                            month,
-                            day,
-                            hour,
-                            min,
-                            0
+
+                    val deadlineDate = sharedViewModel.getDeadline(task.id)
+                    if (deadlineDate == null) {
+                        code = Random.nextInt()
+                        sharedViewModel.addDeadline(
+                            DoneDate(
+                                0,
+                                task.id,
+                                TYPE_DEADLINE,
+                                year,
+                                month,
+                                day,
+                                hour,
+                                min,
+                                0, code
+                            )
                         )
-                    )
-                    dismiss()
+                    } else {
+                        code = deadlineDate.alarm
+                        sharedViewModel.editDeadline(
+                            deadlineDate.copy(
+                                year = year,
+                                month = month,
+                                day = day,
+                                hour = hour,
+                                minute = min
+                            )
+                        )
+                    }
                 }
+
+                //AlarmManager
+                val e = Intent(requireContext(), AlarmReceiver::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable(EXTRA_KEY_DATA, task)
+                e.putExtra(EXTRA_KEY_DATA, bundle)
+
+                val p = PendingIntent.getBroadcast(
+                    requireContext(), code,
+                    e,
+                    FLAG_UPDATE_CURRENT
+                )
+
+                val alarm = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+                val a = jalaliToGregorian(year, month, day)
+
+                val calendar = Calendar.getInstance().apply {
+                    // timeInMillis = System.currentTimeMillis()
+                    set(Calendar.YEAR, a[0])
+                    set(Calendar.MONTH, --a[1])
+                    set(Calendar.DAY_OF_MONTH, a[2])
+                    set(Calendar.HOUR_OF_DAY, hour)
+                    set(Calendar.MINUTE, min)
+                    set(Calendar.SECOND, 0)
+                    // set(year, month, day, hour, min, 0)
+                }
+                Log.i(
+                    "TAG",
+                    "onViewCreated: ${System.currentTimeMillis()} - ${calendar.timeInMillis} = ${System.currentTimeMillis() - calendar.timeInMillis}"
+                )
+
+                alarm.set(
+                    AlarmManager.RTC_WAKEUP, calendar.timeInMillis, p
+                )
+                //cancel alarm
+                dismiss()
             }
         }
 

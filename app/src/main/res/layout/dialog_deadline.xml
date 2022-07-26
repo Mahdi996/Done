@@ -48,12 +48,14 @@
 
                 <TextView
                     android:id="@+id/dialogTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:text="@string/set_date"
                     android:textSize="16sp"
+                    android:text="@string/set_date"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/dialogClose"
                     app:layout_constraintTop_toTopOf="parent" />
 

@@ -7,13 +7,16 @@ import kotlinx.coroutines.flow.Flow
 interface DateRepository {
 
     @Query("select * from date where taskId=:taskId")
-    suspend fun get(taskId: Int): List<DoneDate>
+    fun get(taskId: Int): Flow<List<DoneDate>>
 
     @Query("select taskId from date where year=:year and month=:month and day=:day")
-    fun getOneDayTasks(year:Int, month:Int, day:Int): Flow<List<Int>>
+    fun getOneDayTasks(year: Int, month: Int, day: Int): Flow<List<Int>>
 
     @Query("select day from date where year=:year and month=:month")
-    suspend fun getMonthTasks(year:Int, month:Int):List<Int>
+    suspend fun getMonthTasks(year: Int, month: Int): List<Int>
+
+    @Query("select * from date where taskId=:task and type=2")
+    fun getDeadline(task: Int): DoneDate
 
     @Insert
     suspend fun add(date: DoneDate)

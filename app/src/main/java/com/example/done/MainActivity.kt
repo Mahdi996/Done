@@ -1,13 +1,16 @@
 package com.example.done
 
-import android.content.Context
+import android.app.AlarmManager
+import android.app.AlarmManager.RTC_WAKEUP
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import com.example.done.common.AlarmReceiver
+import com.example.done.common.EXTRA_KEY_DATA
 import com.example.done.common.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -23,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
-
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

@@ -11,7 +11,7 @@ const val TYPE_DEADLINE = 2
 @Entity(tableName = "date")
 data class DoneDate(
     @PrimaryKey(autoGenerate = true)
-    val id: Int=0,
+    val id: Int = 0,
     val taskId: Int,
     val type: Int,
     val year: Int,
@@ -19,5 +19,6 @@ data class DoneDate(
     val day: Int,
     val hour: Int,
     val minute: Int,
-    val second: Int
+    val second: Int,
+    var alarm: Int = 0
 )

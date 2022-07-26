@@ -1,6 +1,10 @@
 package com.example.done
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.NotificationManager.IMPORTANCE_DEFAULT
+import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.room.Room
@@ -31,12 +35,17 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationChannel = NotificationChannel("doneChannel", "Task reminder", IMPORTANCE_HIGH)
+        notificationChannel.description = "This Notification channel used for task reminder"
+        notificationManager.createNotificationChannel(notificationChannel)
+
         val myModules = module {
             single {
                 Room.databaseBuilder(
                     this@App,
                     AppDatabase::class.java,
-                    "fgbjofgpbjposdfgjbsrt"
+                    "DoneAppDb"
                 ).build()
             }
 

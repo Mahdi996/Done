@@ -1,11 +1,17 @@
 package com.example.done.feature.task.detail
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
@@ -16,11 +22,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.done.R
+import com.example.done.common.AlarmReceiver
 import com.example.done.common.EXTRA_KEY_DATA
 import com.example.done.common.formatDate
 import com.example.done.common.getFullTime
+import com.example.done.data.date.DoneDate
 import com.example.done.data.date.TYPE_CREATE
 import com.example.done.data.date.TYPE_DEADLINE
+import com.example.done.data.date.TYPE_UPDATE
 import com.example.done.data.subtask.SubTask
 import com.example.done.data.task.Task
 import com.example.done.feature.task.detail.deadline.DeadlineFragment
@@ -32,9 +41,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.util.*
 
-
-class TaskDetailActivity() : AppCompatActivity(),
+class TaskDetailActivity : AppCompatActivity(),
     SubTasksInDetailAdapter.SubTasksAdapterOnClickListener,
     AddOrEditSubTask.AddOrEditSubTaskCallback {
 
@@ -47,7 +56,7 @@ class TaskDetailActivity() : AppCompatActivity(),
     private var idTask: Int = 0
 
     private var updateDateId = 0
-    private var deadlineDateId = 0
+    private var deadline: DoneDate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +82,7 @@ class TaskDetailActivity() : AppCompatActivity(),
         val createdDate = findViewById<TextView>(R.id.detailCreatedDate)
 
         val setReminder = findViewById<MaterialButton>(R.id.DetailSetReminder)
+        val deleteReminder = findViewById<ImageView>(R.id.detailDeleteReminder)
 
         //Subs
         viewModel.subs.observe(this) {
@@ -95,19 +105,49 @@ class TaskDetailActivity() : AppCompatActivity(),
         } else note.text = task.note
 
         //set dates on view
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getDates().forEach { date ->
+        viewModel.getDates().observe(this@TaskDetailActivity) {
+
+            it.forEach { date ->
                 when (date.type) {
                     TYPE_CREATE -> createdDate.text = formatDate(date)
                     TYPE_DEADLINE -> {
                         setReminder.text = getFullTime(date)
+                        deleteReminder.visibility = View.VISIBLE
+                        deadline = date
                     }
+                    TYPE_UPDATE -> updateDateId = date.id
                 }
             }
         }
 
-        //TODO وقتی میخای ددلاین ست کنی. بعد از اینکه مقدار ددلاین ست کردی میری ایدی ساخت میگیری و مقدار بولین هوددلاین ترو میکنی
+        deleteReminder.setOnClickListener {
 
+
+            val e = Intent(this@TaskDetailActivity, AlarmReceiver::class.java)
+
+            val p = PendingIntent.getBroadcast(
+                this@TaskDetailActivity, deadline!!.alarm,
+                e,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel.deleteReminder(deadline!!)
+                deadline = null
+            }
+            val alarm =
+                this@TaskDetailActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+            alarm.cancel(p)
+
+            deleteReminder.visibility = View.GONE
+            setReminder.text = resources.getString(R.string.set_date_time)
+
+            /* lifecycleScope.launch(Dispatchers.IO) {
+                 viewModel.editReminder(task.copy(alarm = null))
+                 deleteReminder.visibility = View.GONE
+                 setReminder.text = resources.getString(R.string.set_date_time)
+             }*/
+        }
 
         //when title empty and click save, show error
         //this is for hide error when type a word
@@ -145,7 +185,7 @@ class TaskDetailActivity() : AppCompatActivity(),
                 this,
                 R.style.RightJustifyTheme
             ).setMessage("این تسک حذف بشه؟")
-                .setPositiveButton("خذف") { _, _ ->
+                .setPositiveButton("حذف") { _, _ ->
                     lifecycleScope.launch(Dispatchers.IO) {
                         viewModel.deleteTask(task)
                         finish()
@@ -160,8 +200,6 @@ class TaskDetailActivity() : AppCompatActivity(),
         }
 
 
-        //Note
-        //TODO note and addNote use same Code
         //add note
         addNoteBtn.setOnClickListener {
             //create view for set in dialog
