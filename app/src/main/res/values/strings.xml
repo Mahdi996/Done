@@ -1,19 +1,8 @@
 <resources>
     <string name="app_name">Done</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_test_calenders">TestCalendersActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">بعدی</string>
     <string name="save">ذخیره</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
-
     <string name="weekday_1">ش</string>
     <string name="weekday_2">ی</string>
     <string name="weekday_3">د</string>
@@ -41,5 +30,10 @@
     <string name="delete_task">حذف تسک</string>
     <string name="detail">جزئیات</string>
     <string name="delete_completed">تسک های انجام شده حذف کن</string>
+    <string name="invite_friend">دعوت دوستان</string>
+    <string name="star">ثبت نظر</string>
+    <string name="support">ارتباط با پشتیبانی</string>
+    <string name="deleteAllData">حذف همه اطلاعات</string>
+    <string name="emptyStateHint">هیچ تسکی نیست\nکاری که میخوایی انجام بدی پایین بنویس و + بزن</string>
 
 </resources>

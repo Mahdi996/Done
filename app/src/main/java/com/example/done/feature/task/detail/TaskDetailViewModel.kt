@@ -41,12 +41,6 @@ class TaskDetailViewModel(
         }
     }
 
-    suspend fun deleteReminder(doneDate: DoneDate) {
-        viewModelScope.launch {
-            dateRepository.delete(doneDate)
-        }
-    }
-
     suspend fun deleteTask(task: Task) {
         viewModelScope.launch {
             taskRepository.delete(task)
@@ -107,6 +101,8 @@ class TaskDetailViewModel(
         )
     }
 
+    fun getDeadline(taskId: Int): DoneDate = dateRepository.getDeadline(taskId)
+
     suspend fun addDeadline(doneDate: DoneDate) {
         dateRepository.add(doneDate.copy(taskId = id))
     }
@@ -115,6 +111,10 @@ class TaskDetailViewModel(
         dateRepository.edit(doneDate)
     }
 
-    fun getDeadline(taskId: Int): DoneDate = dateRepository.getDeadline(taskId)
-
+    suspend fun deleteReminder(doneDate: DoneDate) {
+        viewModelScope.launch {
+            dateRepository.delete(doneDate)
+            taskRepository.edit(task!!.copy(deadlineUtc = ""))
+        }
+    }
 }

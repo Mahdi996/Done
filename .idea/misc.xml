@@ -14,11 +14,16 @@
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.164" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1355" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_launcher_background.xml" value="0.164" />
+        <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_launcher_my_foreground.xml" value="0.13" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_add_24.xml" value="0.164" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_arrow_back_24.xml" value="0.1515" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_check_circle_24.xml" value="0.1355" />
+        <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_delete_24.xml" value="0.13" />
+        <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_email_24.xml" value="0.13" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_more_vert_24.xml" value="0.1335" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_search_24.xml" value="0.153" />
+        <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_share_24.xml" value="0.13" />
+        <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_outline_star_rate_24.xml" value="0.13" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_round_calendar_today_24.xml" value="0.1515" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_round_chevron_left_24.xml" value="0.164" />
         <entry key="..\:/Projects/Done/app/src/main/res/drawable/ic_round_chevron_right_24.xml" value="0.164" />
@@ -60,6 +65,9 @@
         <entry key="..\:/Projects/Done/app/src/main/res/menu/bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Done/app/src/main/res/menu/main_navigation.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Done/app/src/main/res/menu/tasks_menu.xml" value="0.20833333333333334" />
+        <entry key="..\:/Projects/Done/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13" />
+        <entry key="..\:/Projects/Done/app/src/main/res/mipmap-anydpi-v26/ic_launcher_my.xml" value="0.13" />
+        <entry key="..\:/Projects/Done/app/src/main/res/xml/root_preferences.xml" value="0.19814814814814816" />
       </map>
     </option>
   </component>

@@ -172,7 +172,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
                 selectedYear = year
                 selectedMonth = month
 
-                monthName.text = "$year ${CalendarConstants.months[month]}"
+                monthName.text = "$year ${Constants.months[month]}"
             }
         })
 
@@ -207,6 +207,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
                     val deadlineDate = sharedViewModel.getDeadline(task.id)
                     if (deadlineDate == null) {
                         code = Random.nextInt()
+                        task.deadlineUtc="1"
                         sharedViewModel.addDeadline(
                             DoneDate(
                                 0,
@@ -220,6 +221,7 @@ class DeadlineFragment : BottomSheetDialogFragment() {
                                 0, code
                             )
                         )
+                        viewModel.editTask(task)
                     } else {
                         code = deadlineDate.alarm
                         sharedViewModel.editDeadline(

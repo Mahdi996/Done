@@ -15,10 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.done.*
-import com.example.done.common.CalendarConstants
-import com.example.done.common.EXTRA_KEY_DATA
-import com.example.done.common.formatDate
-import com.example.done.common.formatDateGregorian
+import com.example.done.common.*
 import com.example.done.data.calendar.CalendarDay
 import com.example.done.data.date.DoneDate
 import com.example.done.data.task.Task
@@ -67,7 +64,7 @@ class CalendarFragment : Fragment(), TaskAdapter.TaskOnClickListener {
                 selectedYear = year
                 selectedMonth = month
 
-                monthName.text = "$year ${CalendarConstants.months[month]}"
+                monthName.text = "$year ${Constants.months[month]}"
             }
         })
 

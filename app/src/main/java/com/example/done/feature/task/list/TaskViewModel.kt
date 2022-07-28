@@ -1,6 +1,5 @@
 package com.example.done.feature.task.list
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -34,8 +33,11 @@ class TaskViewModel(
     }.flatMapLatest { (search, hide, sort) ->
         taskRepository.get(search, hide, sort)
     }
-
     val tasks = taskFlow.asLiveData()
+
+init {
+
+}
 
     fun saveSettings(hide: Boolean, sort: Int) {
         sharedPreferences.saveSetting(hide, sort)

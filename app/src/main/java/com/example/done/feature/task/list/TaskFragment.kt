@@ -54,7 +54,9 @@ class TaskFragment : Fragment(), TaskAdapter.TaskOnClickListener {
 
         val rv = binding.tasksRv
         val fab = binding.include.addTaskFab
+        fab.hide()
         val title = binding.include.addTaskED
+        val emptyState = binding.homeEmptyState
 
         val search = binding.homeSearchEd
         val more = binding.homeMoreIv
@@ -65,7 +67,7 @@ class TaskFragment : Fragment(), TaskAdapter.TaskOnClickListener {
 
         //show fab when somethings write in title editText
         title.doOnTextChanged { text, _, _, _ ->
-            if (text!!.isNotEmpty())
+            if (!text!!.isNullOrEmpty())
                 fab.show()
             else
                 fab.hide()
@@ -112,8 +114,13 @@ class TaskFragment : Fragment(), TaskAdapter.TaskOnClickListener {
         rv.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         viewModel.tasks.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
+            if (it.isNullOrEmpty()) {
+                emptyState.visibility = View.VISIBLE
+                rv.visibility = View.GONE
+            } else {
                 rv.adapter = TaskAdapter(it as MutableList<Task>, this, color)
+                emptyState.visibility = View.GONE
+                rv.visibility = View.VISIBLE
             }
         }
 
@@ -127,8 +134,6 @@ class TaskFragment : Fragment(), TaskAdapter.TaskOnClickListener {
                 }
             }
         }
-
-
         return root
     }
 

@@ -18,6 +18,8 @@
     <color name="bottomNavigationLight">#F1F4FA</color>
     <color name="bottomNavigationLightTest">#FFFBFBFB</color>
 
+    <color name="deleteColor">#E53935</color>
+
     <color name="pink">#ffff1494</color>
     <color name="purple">#FF7E57C2</color>
     <color name="yellow">#FFFFBD21</color>

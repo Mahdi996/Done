@@ -122,7 +122,6 @@ class TaskDetailActivity : AppCompatActivity(),
 
         deleteReminder.setOnClickListener {
 
-
             val e = Intent(this@TaskDetailActivity, AlarmReceiver::class.java)
 
             val p = PendingIntent.getBroadcast(
@@ -130,23 +129,21 @@ class TaskDetailActivity : AppCompatActivity(),
                 e,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-            lifecycleScope.launch(Dispatchers.IO) {
-                viewModel.deleteReminder(deadline!!)
-                deadline = null
-            }
+
             val alarm =
                 this@TaskDetailActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
             alarm.cancel(p)
+            p.cancel()
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel.deleteReminder(deadline!!)
+                deadline = null
+            }
 
             deleteReminder.visibility = View.GONE
             setReminder.text = resources.getString(R.string.set_date_time)
 
-            /* lifecycleScope.launch(Dispatchers.IO) {
-                 viewModel.editReminder(task.copy(alarm = null))
-                 deleteReminder.visibility = View.GONE
-                 setReminder.text = resources.getString(R.string.set_date_time)
-             }*/
         }
 
         //when title empty and click save, show error
@@ -305,11 +302,9 @@ class TaskDetailActivity : AppCompatActivity(),
         }
     }
 
-
     override fun onBackPressed() {
         super.onBackPressed()
 
-        //todo change to SnackBar
         Toast.makeText(this, "Changes Saved", Toast.LENGTH_LONG).show()
     }
 }

@@ -82,12 +82,42 @@
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:paddingBottom="16dp"
+                android:visibility="gone"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
                 app:layout_constraintBottom_toTopOf="@+id/include"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/homeEmptyState"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/include"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="350dp"
+                    android:layout_height="350dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"
+                    app:srcCompat="@drawable/empty_state" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/emptyStateHint"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <include
                 android:id="@+id/include"

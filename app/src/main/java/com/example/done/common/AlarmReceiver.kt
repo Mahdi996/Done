@@ -19,22 +19,23 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val task = intent?.getBundleExtra(EXTRA_KEY_DATA)?.getParcelable<Task>(EXTRA_KEY_DATA)
-        val i = Intent(context, TaskDetailActivity::class.java).apply {
-            putExtra(EXTRA_KEY_DATA, task)
+        if (task?.deadlineUtc == "1") {
+            val i = Intent(context, TaskDetailActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA, task)
+            }
+            i.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_NEW_TASK
+            val pendingIntent = PendingIntent.getActivity(context, 0, i, FLAG_UPDATE_CURRENT)
+            val notification = NotificationCompat.Builder(context!!, "doneChannel")
+                .setSmallIcon(R.drawable.ic_outline_check_circle_24)
+                .setContentTitle("یادآوری")
+                .setContentText(task?.title)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build()
+
+            val notificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(Random.nextInt(), notification)
         }
-        i.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_NEW_TASK
-        val pendingIntent = PendingIntent.getActivity(context, 0, i, FLAG_UPDATE_CURRENT)
-        val notification = NotificationCompat.Builder(context!!, "doneChannel")
-            .setSmallIcon(R.drawable.ic_outline_check_circle_24)
-            .setContentTitle("یادآوری")
-            .setContentText(task?.title)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .build()
-
-        val notificationManager =
-            context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(Random.nextInt(), notification)
-
     }
 }
