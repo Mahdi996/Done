@@ -5,9 +5,6 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-/**
- * Created by Tenkei on 12/12/2015.
- */
 public class SquareContainer extends FrameLayout {
     public SquareContainer(Context context) {
         super(context);

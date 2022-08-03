@@ -10,11 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.done.*
 import com.example.done.common.*
 import com.example.done.data.calendar.CalendarDay
 import com.example.done.data.date.DoneDate
@@ -29,7 +27,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class CalendarFragment : Fragment(), TaskAdapter.TaskOnClickListener {
 

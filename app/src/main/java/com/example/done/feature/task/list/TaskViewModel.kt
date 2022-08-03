@@ -1,5 +1,6 @@
 package com.example.done.feature.task.list
 
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,10 +10,13 @@ import com.example.done.data.date.DateRepository
 import com.example.done.data.date.DoneDate
 import com.example.done.data.date.TYPE_CREATE
 import com.example.done.data.date.TYPE_UPDATE
+import com.example.done.data.setting.SettingContainer.hide
 import com.example.done.data.setting.SettingRepository
 import com.example.done.data.task.Task
 import com.example.done.data.task.TaskRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -28,16 +32,25 @@ class TaskViewModel(
     val hideCompleted = MutableStateFlow(false)
     val sort = MutableStateFlow(SortTask.BY_NAME)
 
-    private val taskFlow = combine(search, hideCompleted, sort) { search, hide, sort ->
-        Triple(search, hide, sort)
-    }.flatMapLatest { (search, hide, sort) ->
-        taskRepository.get(search, hide, sort)
+
+    /* private val taskFlow = combine(search, hideCompleted, sort) { search, hide, sort ->
+          Triple(search, hide, sort)
+      }.flatMapLatest { (search, hide, sort) ->
+          taskRepository.get(search, hide, sort)
+      }*/
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun test(): Flow<List<Task>> {
+        val taskFlow = combine(search, hideCompleted, sort) { search, hide, sort ->
+            Triple(search, hide, sort)
+        }.flatMapLatest { (search, hide, sort) ->
+            taskRepository.get(search, hide, sort)
+        }
+        return taskFlow
     }
-    val tasks = taskFlow.asLiveData()
 
-init {
+    val tasks = test().asLiveData()
 
-}
 
     fun saveSettings(hide: Boolean, sort: Int) {
         sharedPreferences.saveSetting(hide, sort)

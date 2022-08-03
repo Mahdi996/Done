@@ -11,10 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Keivan Esbati on 11/18/2016.
- */
-
 public class SmoothViewPager extends ViewPager {
 
     Field mMyScroller;

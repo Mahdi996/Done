@@ -113,6 +113,7 @@ class TaskFragment : Fragment(), TaskAdapter.TaskOnClickListener {
         //get List Tasks and Create RecyclerView
         rv.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
         viewModel.tasks.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
                 emptyState.visibility = View.VISIBLE
