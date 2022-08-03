@@ -9,7 +9,6 @@ const val EXTRA_KEY_DATA = "task"
 
 fun main() {
 
-
     val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
     //for send this pattern to server
