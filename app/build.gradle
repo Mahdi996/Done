@@ -41,8 +41,8 @@ android {
 dependencies {
 
     implementation project(path: ':persiandatepicker')
-    def koin_version = "3.2.0"
-    def roomVersion = "2.5.0-alpha02"
+        def koin_version = "3.2.0"
+        def roomVersion = "2.5.0-alpha02"
     def lifecycleVersion = "2.5.0"
 
     implementation 'androidx.core:core-ktx:1.8.0'
