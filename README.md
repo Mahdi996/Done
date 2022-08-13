@@ -5,7 +5,7 @@ It's a to-do list app created with Kotlin.
 
 📅 Show tasks in the calendar.
 
-🔔 set reminders for tasks and show notifications on time.
+🔔 Set reminders for tasks and show notifications on time.
 
 it is an application created to memorize the material from online courses.
 ## Technologies
